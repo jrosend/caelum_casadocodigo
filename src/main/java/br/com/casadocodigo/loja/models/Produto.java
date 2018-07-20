@@ -40,6 +40,8 @@ public class Produto {
 
 	@DateTimeFormat
 	private Calendar dataLancamento;
+	
+	private String caminhoSumario;
 
 	public String getTitulo() {
 		return titulo;
@@ -95,6 +97,14 @@ public class Produto {
 
 	public void setDataLancamento(Calendar dataLancamento) {
 		this.dataLancamento = dataLancamento;
+	}
+
+	public String getCaminhoSumario() {
+		return caminhoSumario;
+	}
+
+	public void setCaminhoSumario(String caminhoSumario) {
+		this.caminhoSumario = caminhoSumario;
 	}
 
 	@Override

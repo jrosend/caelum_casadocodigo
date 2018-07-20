@@ -38,7 +38,7 @@
 		<c:forEach items="${produtos}" var="produto" varStatus="index">
 			<tr>
 				<td>
-					${produto.titulo}
+					<a href="/casadocodigo/produtos/${produto.id}">${produto.titulo}</a>
 				</td>
 				<td>
 					${produto.autor}

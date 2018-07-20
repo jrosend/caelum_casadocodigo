@@ -14,7 +14,7 @@
 		<h3>Novo produto</h3>
 		
 		<c:url value="/casadocodigo/produtos" var="urlSalvar"/>
-		<form:form id="formNovoLivro" method="post" action="/casadocodigo/produtos" commandName="produto">
+		<form:form id="formNovoLivro" method="post" action="/casadocodigo/produtos" commandName="produto" enctype="multipart/form-data">
 			<div>
 				Título
 				<form:input path="titulo" type="text" name="titulo"/>
@@ -56,6 +56,12 @@
 				<label for="dataLancamento">Data de lançamento</label>
 				<form:input type="date" path="dataLancamento" name="dataLancamento" id="dataLancamento"/>
 				<form:errors path="dataLancamento"></form:errors>
+			</div>
+			
+			<div>
+				<label for="sumario">Sumário do livro</label>
+				<input type="file" name="sumario" id="sumario"/>
+				<form:errors path="caminhoSumario"/>
 			</div>
 			
 			<input type="submit" value="Incluir"></input>

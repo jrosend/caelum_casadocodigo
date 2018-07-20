@@ -22,4 +22,8 @@ public class ProdutoRepository {
 	public List<Produto> listarProdutos(){
 		return em.createQuery("select distinct(p) from Produto p left join fetch p.precos", Produto.class).getResultList();
 	}
+
+	public Produto getById(Long id) {
+		return em.createQuery("select p from Produto p join fetch p.precos where p.id = :id", Produto.class).setParameter("id", id).getSingleResult();
+	}
 }
