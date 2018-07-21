@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -70,6 +71,7 @@ public class ProdutoController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
+	@Cacheable("livrosRecentes")
 	public ModelAndView obterProdutos(){
 		List<Produto> produtos = this.produtosRepository.listarProdutos();
 		produtos.forEach((produto) -> System.out.println(produto));
