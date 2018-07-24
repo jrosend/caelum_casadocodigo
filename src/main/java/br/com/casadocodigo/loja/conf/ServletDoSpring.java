@@ -1,8 +1,10 @@
 package br.com.casadocodigo.loja.conf;
 
+import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration.Dynamic;
 
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class ServletDoSpring extends AbstractAnnotationConfigDispatcherServletInitializer{
@@ -26,5 +28,13 @@ public class ServletDoSpring extends AbstractAnnotationConfigDispatcherServletIn
 	protected void customizeRegistration(Dynamic registration) {
 		registration.setMultipartConfig(new MultipartConfigElement(""));
 	}
+	
+	@Override
+	protected Filter[] getServletFilters() {
+		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+		encodingFilter.setEncoding("UTF8");
+		return new Filter[] {encodingFilter};
+	}
+	
 	
 }

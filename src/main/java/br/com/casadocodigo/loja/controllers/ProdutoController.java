@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.models.Produto;
 import br.com.casadocodigo.loja.models.TipoProduto;
-import br.com.casadocodigo.loja.models.validators.ArquivoValidator;
 import br.com.casadocodigo.loja.repository.ProdutoRepository;
 import br.com.casadocodigo.loja.utils.FileManager;
 
@@ -46,6 +46,7 @@ public class ProdutoController {
 	
 	@Transactional
 	@RequestMapping(method = RequestMethod.POST)
+	@CacheEvict(value="livrosRecentes", allEntries=true)
 	public ModelAndView inserirProduto(
 			@Valid Produto produto, 
 			BindingResult bindingResult, 
@@ -77,7 +78,9 @@ public class ProdutoController {
 		produtos.forEach((produto) -> System.out.println(produto));
 		return new ModelAndView("produtos/lista", "produtos", produtos);
 	}
+	
 	@RequestMapping(method = RequestMethod.GET, value="/{id}")
+	@Cacheable(value="detalheProduto") //TODO cachear produtos únicos
 	public ModelAndView obterProduto(@PathVariable("id") Long id){
 		Produto produto = this.produtosRepository.getById(id);
 		System.out.println(produto);
