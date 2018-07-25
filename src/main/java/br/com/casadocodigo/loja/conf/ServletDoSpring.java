@@ -7,16 +7,18 @@ import javax.servlet.ServletRegistration.Dynamic;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import br.com.casadocodigo.loja.services.UserDetailService;
+
 public class ServletDoSpring extends AbstractAnnotationConfigDispatcherServletInitializer{
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return null;
+		return new Class[]{SpringSecurityConfig.class, JPAConfig.class, UserDetailService.class, AppConfig.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[]{AppConfig.class, JPAConfig.class};
+		return new Class[]{};
 	}
 
 	@Override

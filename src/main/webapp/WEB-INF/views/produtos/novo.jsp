@@ -10,11 +10,11 @@
 	<body>
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+		<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 		
 		<h3>Novo produto</h3>
 		
-		<c:url value="/casadocodigo/produtos" var="urlSalvar"/>
-		<form:form id="formNovoLivro" method="post" action="/casadocodigo/produtos" commandName="produto" enctype="multipart/form-data">
+		<form:form servletRelativeAction="/produtos" id="formNovoLivro" method="post" commandName="produto" enctype="multipart/form-data">
 			<div>
 				Título
 				<form:input path="titulo" type="text" name="titulo"/>
