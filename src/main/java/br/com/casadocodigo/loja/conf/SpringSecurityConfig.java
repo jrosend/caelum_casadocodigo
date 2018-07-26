@@ -6,11 +6,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@EnableWebMvc
+@EnableWebMvcSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -22,7 +23,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers(HttpMethod.POST, "/produtos").hasRole("ADMIN")
 		.antMatchers("/produtos/**").permitAll()
 		.anyRequest().authenticated()
-		.and().formLogin().and().httpBasic();
+		.and().formLogin().loginPage("/login").defaultSuccessUrl("/produtos").permitAll()
+		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/produtos").permitAll()
+		.and().exceptionHandling().accessDeniedPage("/WEB-INF/views/errors/403.jsp");
 	}
 	
 	@Override
