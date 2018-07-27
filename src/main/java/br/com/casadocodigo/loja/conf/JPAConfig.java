@@ -26,9 +26,9 @@ public class JPAConfig {
 	}
 	
 	@Bean
-	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean(){
+	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean(DataSource dataSource){
 		LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-		localContainerEntityManagerFactoryBean.setDataSource(dataSource());
+		localContainerEntityManagerFactoryBean.setDataSource(dataSource);
 		localContainerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		localContainerEntityManagerFactoryBean.setJpaProperties(jpaProperties());
 		localContainerEntityManagerFactoryBean.setPackagesToScan("br.com.casadocodigo.loja.models");
