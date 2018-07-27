@@ -9,8 +9,8 @@
 
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal" var="user"/>
-		<div>Olá, ${user.nome}</div>
-		<div>
+		<div><spring:message code="users.welcome" arguments="${user.nome}"></spring:message></div>
+		<div> 
 			<a href="/casadocodigo/logout">Sair</a>
 		</div>
 	</sec:authorize>
